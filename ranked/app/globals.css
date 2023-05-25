@@ -2,10 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-
-}
-
-main {
-  background: white;
+html,
+body,
+:root {
+  height: 100%;
 }
