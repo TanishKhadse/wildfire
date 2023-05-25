@@ -24,12 +24,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <nav>
-        <Image
-        src="/rankedlogo.png"
-        width={500}
-        height={500}
-        alt="Picture of the author"
-      />
+        <a href="/">
+            <Image
+              src="/rankedlogo.png"
+              width={250}
+              height={500}
+              alt="Picture of the author"
+              />
+        </a>
+
 
         </nav>
         {children}
