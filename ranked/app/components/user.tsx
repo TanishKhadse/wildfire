@@ -1,5 +1,4 @@
-
-
+import UserPic from './user-pic'
 
 export default function User() {
     // two buttons: register / login
@@ -11,17 +10,15 @@ export default function User() {
         ">
             <div className="
                 cursor-pointer
-                border-[1px]
-                rounded-full
-                border-neutral-400
-                px-3
                 py-1
-
-                hover:border-orange-300 
                 hover:text-orange-300
-
+                flex
+                gap-3
+                items-center
             ">
-                Login
+
+                Login/Register
+                {/* <UserPic src=""/> */}
             </div>
         </div>
 
