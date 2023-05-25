@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import Logo from "./components/logo"
+import NavigationBar from "./components/navbar"
 import { Poppins } from 'next/font/google'
 import './globals.css'
 
@@ -23,18 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav>
-        <a href="/">
-            <Image
-              src="/rankedlogo.png"
-              width={250}
-              height={500}
-              alt="Picture of the author"
-              />
-        </a>
+          <NavigationBar/>
 
-
-        </nav>
         {children}
         
       </body>
