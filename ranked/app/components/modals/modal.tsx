@@ -3,6 +3,12 @@ import {useCallback, useEffect, useState} from "react"
 import Button from "../button"
 import {BiX} from "react-icons/bi";
 
+
+/**
+ * ModalProps interface declares which "attributes" can be called for the Modal component
+ * isOpen -> bool (modal is currently open)
+ * onClose -> function for 
+ */
 interface ModalProps {
     isOpen?: boolean;
     onClose: () => void; // required
@@ -41,9 +47,13 @@ const Modal: React.FC<ModalProps> = ({
         setShowModal(false)
         setTimeout(()=>{
             onClose();
-        }, 300); // 300 ms for animations
+        }, 150); // 300 ms for animations
     }, [onClose, disabled])
 
+    const handleSwitch = useCallback(() => {
+        if (disabled) return;
+        // switch Modal to register Modal or add/delete contents
+    }, [disabled])
 
     const handleSubmit = useCallback(() => {
         if (disabled) return;
@@ -63,8 +73,6 @@ const Modal: React.FC<ModalProps> = ({
                 justify-center 
                 items-center 
                 flex 
-                overflow-x-hidden 
-                overflow-y-auto 
                 fixed 
                 inset-0 
                 z-50 
@@ -75,9 +83,8 @@ const Modal: React.FC<ModalProps> = ({
                 <div className="
                     relative 
                     w-1/3
-                    my-6
                     mx-auto 
-                    h-auto
+                    h-[75%]
                 ">
 
                     {/* CONTENT */}
@@ -101,10 +108,11 @@ const Modal: React.FC<ModalProps> = ({
                             <div className="
                                 flex 
                                 items-center 
-                                p-6
+                                p-2
                                 rounded-t
                                 justify-center
                                 relative
+                                border-b-[1px]
                                 "
                             >
                                 <button 
@@ -115,7 +123,9 @@ const Modal: React.FC<ModalProps> = ({
                                     hover:opacity-70
                                     transition
                                     absolute
-                                    left-9
+                                    left-2
+                                    top-2
+                                    
                                 ">
                                     <BiX/>
                                     
@@ -126,13 +136,14 @@ const Modal: React.FC<ModalProps> = ({
                             </div>
                             {/* BODY */}
                             <div className="relative p-6 flex-auto">
-
+                                {/* inserting predefined HTML: */}
+                                {body}
                             </div>
                             {/* FOOTER */}
-                            <div className="flex flex-col p-2 gap-2">
+                            <div className="flex flex-col gap-2">
                                 <div className="
                                     flex
-                                    flex-row
+                                    flex-col
                                     items-center
                                     gap-4
                                     w-auto
@@ -154,6 +165,26 @@ const Modal: React.FC<ModalProps> = ({
                                         disabled={disabled}
                                         onClick={handleSubmit}
                                     />
+
+                                    <div className="
+                                        h-20
+                                        w-full
+                                        flex
+                                        justify-center
+                                    ">
+                                        <p 
+                                            onClick={handleSwitch}
+                                            className="
+                                            absolute
+                                            bottom-5
+                                            hover:cursor-pointer
+                                            text-sm
+                                            text-neutral-500
+                                            hover:opacity-70
+                                        ">
+                                            Create Account
+                                        </p>
+                                    </div>
 
                                     
                                 </div>

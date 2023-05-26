@@ -1,7 +1,7 @@
 'use client'
 
 import UserPic from './user-pic'
-import useAuthModal from '../hooks/UseLoginModal';
+import useAuthModal from '../hooks/UseAuthModal';
 
 export default function User() {
     // two buttons: register / login
