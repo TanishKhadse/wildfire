@@ -1,16 +1,16 @@
 'use client'
 import {useCallback, useEffect, useState} from "react"
-import Button from "./button"
+import Button from "../button"
 import {BiX} from "react-icons/bi";
 
 interface ModalProps {
     isOpen?: boolean;
-    onClose: () => void;
-    onSubmit: () => void;
+    onClose: () => void; // required
+    onSubmit: () => void; // required
     title?: string;
     body?: React.ReactElement;
     footer?: React.ReactElement;
-    actionLabel: string;
+    actionLabel: string; // required
     disabled?: boolean;
     secondaryAction?: () => void;
     secondaryLabel?: string;
@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
             ">
                 <div className="
                     relative 
-                    w-1/2
+                    w-1/3
                     my-6
                     mx-auto 
                     h-auto
@@ -129,15 +129,31 @@ const Modal: React.FC<ModalProps> = ({
 
                             </div>
                             {/* FOOTER */}
-                            <div className="flex flex-col gap-2 p-6">
+                            <div className="flex flex-col p-2 gap-2">
                                 <div className="
                                     flex
                                     flex-row
                                     items-center
                                     gap-4
-                                    w-full
+                                    w-auto
+                                    justify-center
+                                    h-auto
                                 ">
-                                    <Button label="submit" outline={false}/>
+
+
+                                    {secondaryAction && secondaryLabel && (
+                                        <Button 
+                                            outline
+                                            label={secondaryLabel} 
+                                            disabled={disabled}
+                                            onClick={handleSecondaryAction}
+                                        />      
+                                    )}                              
+                                    <Button 
+                                        label={actionLabel} 
+                                        disabled={disabled}
+                                        onClick={handleSubmit}
+                                    />
 
                                     
                                 </div>

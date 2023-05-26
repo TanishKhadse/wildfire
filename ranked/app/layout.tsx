@@ -1,5 +1,5 @@
 import NavigationBar from "./components/navbar"
-import Modal from "./components/modal"
+import AuthModal from "./components/modals/auth-modal"
 import { Poppins } from 'next/font/google'
 import './globals.css'
 
@@ -23,8 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+          <AuthModal/>
           <NavigationBar/>
-          <Modal isOpen={true} title="Login"/>
 
         {children}
         
