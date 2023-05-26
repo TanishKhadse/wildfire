@@ -1,7 +1,5 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import Logo from "./components/logo"
 import NavigationBar from "./components/navbar"
+import Modal from "./components/modal"
 import { Poppins } from 'next/font/google'
 import './globals.css'
 
@@ -26,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
           <NavigationBar/>
+          <Modal isOpen={true} title="Login"/>
 
         {children}
         
