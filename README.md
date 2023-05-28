@@ -1,7 +1,17 @@
 Ranked
 
-To install Next/React.js: 
+To install Next/React.js/Packages: 
 npm install
+
+Setup .env file
+
+FIREBASE_API_KEY= ,
+FIREBASE_AUTH_DOMAIN= ,
+FIREBASE_PROJECT_ID= ,
+FIREBASE_STORAGE_BUCKET= ,
+FIREBASE_MESSAGING_SENDER_ID= ,
+FIREBASE_APP_ID= ,
+FIREBASE_MEASUREMENT_ID= 
 
 To run:
 npm run dev

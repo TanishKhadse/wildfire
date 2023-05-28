@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({
     actionLabel, 
     disabled, 
     secondaryAction,
-     secondaryLabel
+    secondaryLabel,
 }) => {
     const [showModal, setShowModal] = useState(isOpen);
 
@@ -40,6 +40,12 @@ const Modal: React.FC<ModalProps> = ({
         setShowModal(isOpen);
     }, [isOpen]);
 
+
+    /**
+     * useCallback() -> used for memoizing functions to prevent unecessary rerenders
+     * of child components
+     * 
+     */
 
     const handleClose = useCallback(() => {
         if (disabled) return;
@@ -49,11 +55,6 @@ const Modal: React.FC<ModalProps> = ({
             onClose();
         }, 150); // 300 ms for animations
     }, [onClose, disabled])
-
-    const handleSwitch = useCallback(() => {
-        if (disabled) return;
-        // switch Modal to register Modal or add/delete contents
-    }, [disabled])
 
     const handleSubmit = useCallback(() => {
         if (disabled) return;
@@ -140,18 +141,13 @@ const Modal: React.FC<ModalProps> = ({
                                 {body}
                             </div>
                             {/* FOOTER */}
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 px-6">
                                 <div className="
                                     flex
-                                    flex-col
+                                    flex-row
                                     items-center
-                                    gap-4
                                     w-auto
-                                    justify-center
-                                    h-auto
                                 ">
-
-
                                     {secondaryAction && secondaryLabel && (
                                         <Button 
                                             outline
@@ -165,29 +161,10 @@ const Modal: React.FC<ModalProps> = ({
                                         disabled={disabled}
                                         onClick={handleSubmit}
                                     />
-
-                                    <div className="
-                                        h-20
-                                        w-full
-                                        flex
-                                        justify-center
-                                    ">
-                                        <p 
-                                            onClick={handleSwitch}
-                                            className="
-                                            absolute
-                                            bottom-5
-                                            hover:cursor-pointer
-                                            text-sm
-                                            text-neutral-500
-                                            hover:opacity-70
-                                        ">
-                                            Create Account
-                                        </p>
-                                    </div>
-
                                     
                                 </div>
+
+                                {footer}
                             </div>
                         </div>
                     </div>
