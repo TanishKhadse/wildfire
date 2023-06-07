@@ -3,7 +3,7 @@ import {create} from 'zustand'
 
 interface AuthModalStore {
     isOpen: boolean;
-    switchToReg: boolean;
+    register: boolean;
     onOpen: () => void;
     onClose: () => void;
     toggleSwitch: () => void;
@@ -28,15 +28,15 @@ interface AuthModalStore {
  */
 const useAuthModal = create<AuthModalStore>((set, get) => ({
     isOpen: false,
-    switchToReg: false,
+    register: false,
     onOpen: () => set({isOpen: true}),
     onClose: () => {
-        set({switchToReg: false})
+        set({register: false})
         set({isOpen: false})
     },
     toggleSwitch: () => {
-        const b = !get().switchToReg;
-        set({switchToReg: b})
+        const b = !get().register;
+        set({register: b})
     }
 }));
 

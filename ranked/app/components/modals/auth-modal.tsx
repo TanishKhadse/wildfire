@@ -1,6 +1,5 @@
 'use client';
 
-import axios from 'axios'
 import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'; 
 import useAuthModal from '@/app/hooks/UseAuthModal';
@@ -8,35 +7,22 @@ import Input from '../input';
 import Modal from './modal';
 import {FcGoogle} from 'react-icons/fc';
 import Button from '../button';
-
 import { auth } from '@/firebase/clientApp';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-
-/**
- * provides loading status and used for once user is logged in
- */
+import { 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup
+} from 'firebase/auth';
 import { useAuthState } from "react-firebase-hooks/auth" 
 
-/**
- * FieldValues - a type
- * SubmitHandler
- */
 
 export default function AuthModal() {
 
-    // an object that can control Modal attributes (isOpen)
+    const provider = new GoogleAuthProvider();
     const authModal = useAuthModal();
-
-    /**
-     * State used to dynamically update values
-        const ['name', function] = useState( value )
-        --> value is stored in name
-        --> function can be uesd to change the value in name
-     */
-
-
     const [ isLoading, setIsLoading ] = useState(false);
-
+    const [ user, loading ] =  useAuthState(auth);
 
     /**
      * useForm:
@@ -61,11 +47,16 @@ export default function AuthModal() {
         }
     });
 
+    const signIn = async () => {
+        const result = await signInWithPopup(auth, provider);
+        console.log(result.user);
+    }
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true); // updates state
 
-        if (authModal.switchToReg) {
-            // sign in
+        if (authModal.register) {
+            // register
             createUserWithEmailAndPassword(auth, data["email"], data["password"])
             .then((userCredential) => {
                 console.log(userCredential)
@@ -74,19 +65,28 @@ export default function AuthModal() {
                 console.log(error);
             }).finally(() => {
                 setIsLoading(false);
+                authModal.onClose();
+
             })
              
         } else {
             // log in
             signInWithEmailAndPassword(auth, data["email"], data["password"])
-            .then((userCredential) => {
-                console.log(userCredential)
-            })
-            .catch((error) => {
-                console.log(error);
+            .then((callback) => {
+                setIsLoading(false);
+                
+                if (user) {
+                    console.log(user)
+                    authModal.onClose();
+                } 
+        
+            }).catch((error)=>{
+                console.log(error)
             }).finally(() => {
                 setIsLoading(false);
+                // set boxes to red and say incorrect username or password
             })
+
         }
 
  
@@ -116,7 +116,7 @@ export default function AuthModal() {
                 required
             />
 
-            {authModal.switchToReg && (
+            {authModal.register && (
             <Input
                 id="name"
                 label="Name"
@@ -138,18 +138,6 @@ export default function AuthModal() {
                 required                
             />
 
-{           authModal.switchToReg && (
-            <Input
-                id="passwordSecond"
-                type="password"
-                label="Re-type Password"
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-                required                
-            />
-
-            )}
 
         </div>
     )
@@ -163,7 +151,7 @@ export default function AuthModal() {
                 outline
                 label="Continue with Google"
                 icon={FcGoogle}
-                onClick={()=>{}}   
+                onClick={signIn}   
             />
 
 
@@ -176,7 +164,7 @@ export default function AuthModal() {
                 hover:opacity-70
                 pb-6
             ">
-                {!authModal.switchToReg ? "Create Account" : "Back to login"}
+                {!authModal.register ? "Create Account" : "Back to login"}
             </p>
     </div>
     )
@@ -185,7 +173,7 @@ export default function AuthModal() {
         <Modal
             disabled={isLoading}
             isOpen={authModal.isOpen}
-            title={authModal.switchToReg ? "Register" : "Login"}
+            title={authModal.register ? "Register" : "Login"}
             actionLabel="Sign in"
             onClose={authModal.onClose}
             onSubmit={handleSubmit(onSubmit)}
