@@ -93,7 +93,7 @@ export default function AuthModal() {
         // signUp(data["email"], data["password"]);
         // signUp(auth, );
         
-        // axios.post('/api/register', data).then( () => {
+        // axios.post('/api/register', data).then( () => { // RESTful API
         //     authModal.onClose();
         // })
         // .catch((error)=> {
