@@ -1,6 +1,6 @@
 // async await fetch
 
-export default async function TierList() {
+export default function TierList() {
     return(
         <div>
             <p>Tier List</p>

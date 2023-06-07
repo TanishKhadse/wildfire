@@ -1,6 +1,6 @@
 import Logo from "./logo"
 import User from "./user"
-import Create from "./create"
+import CreateBtn from "./create-btn"
 
 export default function NavigationBar() {
     return (
@@ -18,7 +18,7 @@ export default function NavigationBar() {
                     items-center
                     gap-6
                 ">
-                    <Create/>
+                    <CreateBtn/>
                     <User/>
                 </div>
             </div>
