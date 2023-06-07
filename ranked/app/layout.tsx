@@ -1,5 +1,6 @@
 import NavigationBar from "./components/navbar"
 import AuthModal from "./components/modals/auth-modal"
+import TierList from "./components/tier-list"
 import { Poppins } from 'next/font/google'
 import './globals.css'
 
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
           <AuthModal/>
           <NavigationBar/>
-
+          <TierList/>
         {children}
         
       </body>
