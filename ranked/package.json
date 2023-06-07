@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^13.4.4",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -16,6 +17,7 @@
     "dotenv-safe": "^8.2.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "expo-next-react-navigation": "^2.0.2",
     "firebase": "^9.22.1",
     "next": "13.4.3",
     "next-auth": "^4.22.1",

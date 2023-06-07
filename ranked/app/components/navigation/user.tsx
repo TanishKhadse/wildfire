@@ -1,9 +1,9 @@
 'use client'
 
 import UserPic from './user-pic'
-import useAuthModal from '../hooks/UseAuthModal';
+import useAuthModal from '../../hooks/UseAuthModal';
 
-export default function User() {
+export default function AuthBtn() {
     // two buttons: register / login
     const authModal = useAuthModal();
     return (

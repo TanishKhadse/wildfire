@@ -15,24 +15,16 @@ import {
     signInWithPopup
 } from 'firebase/auth';
 import { useAuthState } from "react-firebase-hooks/auth" 
+import {useRouter} from 'next/navigation';
 
 
 export default function AuthModal() {
+    const router = useRouter();
 
     const provider = new GoogleAuthProvider();
     const authModal = useAuthModal();
     const [ isLoading, setIsLoading ] = useState(false);
     const [ user, loading ] =  useAuthState(auth);
-
-    /**
-     * useForm:
-     * 
-     * register: ...register("field") -> field gets added to form data
-     * handleSubmit: handleSubmit( function(data) ) -> extracts the registered field when submit button is pressed
-     * formState: {errors} -> detects invalid inputs and allows page to still render
-     * 
-     * defaultValues: will select registered fields and set appropriate default values inside of the form
-     */
     const {
         register,
         handleSubmit,
@@ -43,7 +35,7 @@ export default function AuthModal() {
         defaultValues: {
             name: '',
             email: '',
-            password: ''
+            password: '' 
         }
     });
 
@@ -55,11 +47,14 @@ export default function AuthModal() {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true); // updates state
 
+
         if (authModal.register) {
             // register
             createUserWithEmailAndPassword(auth, data["email"], data["password"])
             .then((userCredential) => {
                 console.log(userCredential)
+                if (!userCredential) return;
+                router.push('/') // this redirect you after logging in
             })
             .catch((error) => {
                 console.log(error);
@@ -73,17 +68,14 @@ export default function AuthModal() {
             // log in
             signInWithEmailAndPassword(auth, data["email"], data["password"])
             .then((callback) => {
-                setIsLoading(false);
-                
-                if (user) {
-                    console.log(user)
-                    authModal.onClose();
-                } 
+                router.push('/')
         
             }).catch((error)=>{
                 console.log(error)
             }).finally(() => {
                 setIsLoading(false);
+                authModal.onClose();
+
                 // set boxes to red and say incorrect username or password
             })
 

@@ -1,4 +1,4 @@
-import NavigationBar from "./components/navbar"
+import NavigationBar from "./components/navigation/navbar"
 import AuthModal from "./components/modals/auth-modal"
 import TierList from "./components/tier-list"
 import InputTitle from "./components/input-title"
