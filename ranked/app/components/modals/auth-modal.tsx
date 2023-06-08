@@ -12,7 +12,7 @@ import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
     GoogleAuthProvider, 
-    signInWithPopup
+    signInWithPopup,
 } from 'firebase/auth';
 import { useAuthState } from "react-firebase-hooks/auth" 
 import {useRouter} from 'next/navigation';
@@ -54,7 +54,7 @@ export default function AuthModal() {
             .then((userCredential) => {
                 console.log(userCredential)
                 if (!userCredential) return;
-                router.push('/') // this redirect you after logging in
+                // router.push('/') // this redirect you after logging in
             })
             .catch((error) => {
                 console.log(error);
@@ -68,7 +68,7 @@ export default function AuthModal() {
             // log in
             signInWithEmailAndPassword(auth, data["email"], data["password"])
             .then((callback) => {
-                router.push('/')
+                // router.push('/')
         
             }).catch((error)=>{
                 console.log(error)
