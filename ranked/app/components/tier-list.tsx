@@ -1,40 +1,22 @@
-// async await fetch
+import Tier from "./tier";
 
 export default function TierList() {
     return(
         <div>
-            <div 
-                className="
-                mx-10
+            <div className="
                 mt-5
-                h-[500px]
-                w-[80px]
-                text-5xl
                 flex
                 flex-col
-                items-center
-                justify-evenly
-                bg-gradient-to-b from-orange-200 via-red-500 to-stone-700
-                gap-4
                 select-none
-                
+                px-5
             ">
-                <div>S</div>
-                <div>A</div>
-                <div>B</div>
-                <div>C</div>
-                <div>D</div>
-                <div>F</div>
-            </div>
+                <Tier label='S' items={["frost", "oberon", "khora", "wisp","saryn"]}/>
+                <Tier label='A' items={["nidus", "volt", "styanax", "mag", "protea", "ivara", "gyre", "harrow", "nekros"]}/>
+                <Tier label='B' items={["banshee", "atlas", "hildryn", "rhino"]}/>
+                <Tier label='C' items={["loki", "trinity"]}/>
+                <Tier label='D' items={[]}/>
+                <Tier label='F' items={["mesa"]}/>
 
-            <div
-                className="
-                
-
-            ">
-                <div>
-
-                </div>
 
             </div>
         </div>
