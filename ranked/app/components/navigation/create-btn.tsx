@@ -12,7 +12,7 @@ export default function CreateBtn() {
                 flex
                 items-center
                 justify-center
-                hover:text-orange-300
+                hover:text-rose-500
                 cursor-pointer
                 gap-1
             "

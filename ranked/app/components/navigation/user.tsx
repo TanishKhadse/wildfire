@@ -17,7 +17,7 @@ export default function AuthBtn() {
                 className="
                 cursor-pointer
                 py-1
-                hover:text-orange-300
+                hover:text-rose-500
                 flex
                 gap-3
                 items-center

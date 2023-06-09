@@ -64,6 +64,8 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
                     top-14
                     overflow=hidden
                     text-sm
+                    z-50
+                    bg-neutral-100
                 ">
                     <div className="flex flex-col cursor-pointer">
                         <>
