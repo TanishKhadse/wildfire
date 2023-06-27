@@ -1,11 +1,11 @@
 'use client'
 
 import UserPic from './user-pic'
-import useAuthModal from '../../hooks/UseAuthModal';
+import useLoginModal from '../../hooks/UseLoginModal';
 
 export default function AuthBtn() {
     // two buttons: register / login
-    const authModal = useAuthModal();
+    const loginModal = useLoginModal();
     return (
         <div className="
             flex
@@ -13,7 +13,7 @@ export default function AuthBtn() {
             px-4
         ">
             <div 
-                onClick={authModal.onOpen}
+                onClick={loginModal.onOpen}
                 className="
                 cursor-pointer
                 py-1

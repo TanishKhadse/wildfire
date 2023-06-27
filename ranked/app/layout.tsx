@@ -1,9 +1,9 @@
 import NavigationBar from "./components/navigation/navbar"
-import AuthModal from "./components/modals/auth-modal"
-import TierList from "./components/tier-list"
-import InputTitle from "./components/input-title"
+import RegisterModal from "./components/modals/register-modal"
+import LoginModal from "./components/modals/login-modal"
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import getCurrentUser from "./actions/getCurrentUser"
 
 // can be used to make a component that shows up on every page of the app
 
@@ -17,19 +17,23 @@ const inter = Poppins({
   weight: '400'
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const currentUser = await getCurrentUser()
+
   return (
     <html lang="en">
       <body className={inter.className}>
-          <AuthModal/>
-          <NavigationBar/>
+          <RegisterModal/>
+          <LoginModal/>
+          <NavigationBar currentUser={currentUser}/>
         {children}
-        
       </body>
     </html>
+
   )
 }

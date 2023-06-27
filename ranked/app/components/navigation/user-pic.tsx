@@ -5,8 +5,7 @@ import Image from "next/image"
 import { useCallback, useState } from "react"
 import DropDownItem from "./drop-down-item"
 import {useRouter} from 'next/navigation'
-import { useSignOut } from 'react-firebase-hooks/auth'
-import {auth} from '@/firebase/clientApp'
+import { signOut } from "next-auth/react"
 
 
 interface UserPicProps {
@@ -22,11 +21,12 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
     }, [])
 
 
-    const [signOut, loading, error] = useSignOut(auth);
     const handleLogout = () => {
-        signOut();
+        // signOut();
         router.push('/')
     }
+
+
 
     return (
         <div>
@@ -69,8 +69,8 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
                 ">
                     <div className="flex flex-col cursor-pointer">
                         <>
-                        <DropDownItem label="profile" onClick={() => router.push('/profile')}/>
-                        <DropDownItem label="logout" onClick={handleLogout}/>
+                        {/* <DropDownItem label="profile" onClick={() => router.push('/users/' + auth.currentUser?.uid)}/> */}
+                        <DropDownItem label="logout" onClick={() => {signOut()}}/>
                         </>
                     </div>
                 </div>

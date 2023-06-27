@@ -1,4 +1,8 @@
+'use client'
+
 import { BiPlus } from 'react-icons/bi'
+import AddImageModal from './modals/add-image-modal'
+import useAddModal from '../hooks/UseAddModal'
 
 export default function ImageGrid() {
     /** set images to get (images and names): 
@@ -7,13 +11,19 @@ export default function ImageGrid() {
          *  name: "name"
          * }
      */
-    const images= ["yareli", "octavia", "citrine", "mirage", "hydroid", "gara"] 
+
+    const addImageModal = useAddModal();
+    const addImage = (img: string) => {
+        images.push(img)
+    }
+
+    const images = ["yareli", "octavia", "citrine", "mirage", "hydroid", "gara"] 
 
     return (
         <div className="flex flex-col">
             <div className="flex flex-row items-center text-[28px] absolute right-12">
                 
-            <BiPlus />
+            <BiPlus className="cursor-pointer" onClick={addImageModal.onOpen}/>
             </div>
             <div className="
                 grid 
