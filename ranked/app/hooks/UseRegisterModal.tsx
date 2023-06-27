@@ -1,12 +1,9 @@
-import { use } from 'react';
 import {create} from 'zustand'
 
 interface AuthModalStore {
     isOpen: boolean;
-    register: boolean;
     onOpen: () => void;
     onClose: () => void;
-    toggleSwitch: () => void;
 }
 
 
@@ -26,18 +23,11 @@ interface AuthModalStore {
  * These settings are defined here, and we call them in auth-modal.tsx 
  * authModal.FUNCTION_NAME is used within the Modal's props
  */
-const useAuthModal = create<AuthModalStore>((set, get) => ({
+const useRegisterModal = create<AuthModalStore>((set, get) => ({
     isOpen: false,
     register: false,
     onOpen: () => set({isOpen: true}),
-    onClose: () => {
-        set({register: false})
-        set({isOpen: false})
-    },
-    toggleSwitch: () => {
-        const b = !get().register;
-        set({register: b})
-    }
+    onClose: () => set({isOpen: false})
 }));
 
-export default useAuthModal;
+export default useRegisterModal;

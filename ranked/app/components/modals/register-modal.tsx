@@ -2,29 +2,26 @@
 
 import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'; 
-import useAuthModal from '@/app/hooks/UseAuthModal';
+import useRegisterModal from '@/app/hooks/UseRegisterModal';
+import useLoginModal from '@/app/hooks/UseLoginModal';
 import Input from '../input';
 import Modal from './modal';
 import {FcGoogle} from 'react-icons/fc';
 import Button from '../button';
-import { auth } from '@/firebase/clientApp';
-import { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    GoogleAuthProvider, 
-    signInWithPopup,
-} from 'firebase/auth';
+import { signIn } from 'next-auth/react';
 import { useAuthState } from "react-firebase-hooks/auth" 
 import {useRouter} from 'next/navigation';
+import axios from 'axios';
+
 
 
 export default function AuthModal() {
     const router = useRouter();
 
-    const provider = new GoogleAuthProvider();
-    const authModal = useAuthModal();
+    const registerModal = useRegisterModal()
+    const loginModal = useLoginModal()
     const [ isLoading, setIsLoading ] = useState(false);
-    const [ user, loading ] =  useAuthState(auth);
+
     const {
         register,
         handleSubmit,
@@ -39,62 +36,34 @@ export default function AuthModal() {
         }
     });
 
-    const signIn = async () => {
-        const result = await signInWithPopup(auth, provider);
-        console.log(result.user);
-    }
-
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        setIsLoading(true); // updates state
 
+        // change function depending on auth toggle
+        setIsLoading(true);
 
-        if (authModal.register) {
-            // register
-            createUserWithEmailAndPassword(auth, data["email"], data["password"])
-            .then((userCredential) => {
-                console.log(userCredential)
-                if (!userCredential) return;
-                // router.push('/') // this redirect you after logging in
+        axios.post('/api/register', data)
+            .then(() => {
+                signIn('credentials', {
+                    ...data,
+                    redirect: false,
+                })
+                registerModal.onClose();
+                loginModal.onOpen();
+                
             })
             .catch((error) => {
                 console.log(error);
-            }).finally(() => {
-                setIsLoading(false);
-                authModal.onClose();
-
             })
-             
-        } else {
-            // log in
-            signInWithEmailAndPassword(auth, data["email"], data["password"])
-            .then((callback) => {
-                // router.push('/')
-        
-            }).catch((error)=>{
-                console.log(error)
-            }).finally(() => {
-                setIsLoading(false);
-                authModal.onClose();
-
-                // set boxes to red and say incorrect username or password
+            .finally(() => {
+                setIsLoading(false)
             })
 
-        }
-
- 
-        // signUp(data["email"], data["password"]);
-        // signUp(auth, );
-        
-        // axios.post('/api/register', data).then( () => { // RESTful API
-        //     authModal.onClose();
-        // })
-        // .catch((error)=> {
-        //     console.log(error);
-        // })
-        // .finally(() => {
-        //     setIsLoading(false); // updates state after process runs
-        // })
     }
+
+    const onToggle = useCallback(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [registerModal, loginModal])
 
     
     const bodyContent = (
@@ -108,17 +77,14 @@ export default function AuthModal() {
                 required
             />
 
-            {authModal.register && (
             <Input
                 id="name"
                 label="Name"
                 disabled={isLoading}
                 register={register}
                 errors={errors}
-                required                
+                required
             />
-
-            )}
 
             <Input
                 id="password"
@@ -143,11 +109,11 @@ export default function AuthModal() {
                 outline
                 label="Continue with Google"
                 icon={FcGoogle}
-                onClick={signIn}   
+                onClick={() => {signIn("google")}}   
             />
 
 
-            <p onClick={authModal.toggleSwitch}
+            <p onClick={onToggle}
                 className="
                 bottom-5
                 hover:cursor-pointer
@@ -156,7 +122,7 @@ export default function AuthModal() {
                 hover:opacity-70
                 pb-6
             ">
-                {!authModal.register ? "Create Account" : "Back to login"}
+                Already have an account?
             </p>
     </div>
     )
@@ -164,14 +130,13 @@ export default function AuthModal() {
     return (
         <Modal
             disabled={isLoading}
-            isOpen={authModal.isOpen}
-            title={authModal.register ? "Register" : "Login"}
+            isOpen={registerModal.isOpen}
+            title="Register"
             actionLabel="Sign in"
-            onClose={authModal.onClose}
+            onClose={registerModal.onClose}
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
             footer={footerContent}
-            
         />
     );
 }
