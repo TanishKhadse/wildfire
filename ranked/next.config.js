@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-images: {
-    domains: [
-        "lh3.googleusercontent.com",
-    ]
+const nextConfig = {
+    images: {
+        domains: [
+            "res.cloudinary.com",
+            "lh3.googleusercontent.com",
+        ]
+    }
 }
+
+
 
 module.exports = nextConfig

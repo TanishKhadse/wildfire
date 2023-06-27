@@ -1,6 +1,6 @@
 'use client'
 
-import InputTitle from './input-title'
+import InputTitle from './inputs/input-title'
 import TierList from './tier-list'
 import ImageGrid from './image-grid'
 import { BiCog } from 'react-icons/bi'

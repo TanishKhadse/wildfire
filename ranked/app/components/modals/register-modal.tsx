@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'; 
 import useRegisterModal from '@/app/hooks/UseRegisterModal';
 import useLoginModal from '@/app/hooks/UseLoginModal';
-import Input from '../input';
+import Input from '../inputs/input';
 import Modal from './modal';
 import {FcGoogle} from 'react-icons/fc';
 import Button from '../button';

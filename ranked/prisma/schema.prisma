@@ -39,9 +39,23 @@ model Ranking {
   updatedAt DateTime @updatedAt
   userId String @db.ObjectId
   likedIds String[] @db.ObjectId
+  itemIds String[] @db.ObjectId
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // item Item @relation(fields: [itemIds], references: [id], onDelete: Cascade)
+  items Item[]
   comments Comment[]
+}
+
+model Item {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  image String?
+  label String?
+  userId String @db.ObjectId
+  // rankingId String
+
+
+  ranking Ranking @relation(fields: [rankingId], references: [id], onDelete: Cascade)
 }
 
 model Comment {
