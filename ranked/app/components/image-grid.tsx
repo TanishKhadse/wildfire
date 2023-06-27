@@ -3,6 +3,7 @@
 import { BiPlus } from 'react-icons/bi'
 import AddImageModal from './modals/add-image-modal'
 import useAddModal from '../hooks/UseAddModal'
+import Item from './item';
 
 export default function ImageGrid() {
     /** set images to get (images and names): 
@@ -36,9 +37,7 @@ export default function ImageGrid() {
 
             ">
                 {images.map((img) => 
-                    <div className="bg-red-400 h-[70px] w-[70px] flex items-center justify-center">
-                        {img}
-                    </div>
+                    <Item label = {img} src = {''}/> 
                 )}
 
             </div>

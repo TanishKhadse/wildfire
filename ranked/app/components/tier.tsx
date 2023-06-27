@@ -1,4 +1,4 @@
-
+import Item from './item';
 interface TierProps {
     label: String;
     items: String[]
@@ -29,9 +29,7 @@ const Tier: React.FC<TierProps> = ({label, items}) => {
                 gap-2
             ">
                 {items.map((item)=> 
-                <div className="bg-red-400 h-[70px] w-[70px] flex items-center justify-center">
-                    {item}
-                </div>
+                <Item label = {item} src = {''}/>
                 )}
 
             </div>
