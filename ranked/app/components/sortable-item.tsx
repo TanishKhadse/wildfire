@@ -1,14 +1,19 @@
 import Image from "next/image"
 import {useSortable} from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
-export function SortableItem(props) {
+interface SortableItemProps {
+    id: string
+}
+const SortableItem: React.FC<SortableItemProps> = ({
+    id
+}) => {
     const {
         attributes,
         listeners,
         setNodeRef,
         transform,
         transition
-    } = useSortable({id: props.id});
+    } = useSortable({id:id});
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -20,7 +25,7 @@ export function SortableItem(props) {
             <div className = "cursor-move bg-stone-0 w-[90px] h-[90px] flex items-center select-none group">
                 <div className = "w-[90px] h-[90px] invisible group-hover:visible">
                     <p className = "text-center">
-                        {props.id}
+                        {id}
                     </p>
                 </div>
 
@@ -37,3 +42,5 @@ export function SortableItem(props) {
         </div>
     )
 }
+
+export default SortableItem

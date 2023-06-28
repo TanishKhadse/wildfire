@@ -3,7 +3,7 @@ import handleOnDrop from './create-page'
 import handleDragOver from './create-page'
 import CreatePage from './create-page';
 import { useState } from "react"
-import {SortableItem} from './sortable-item'
+import SortableItem from './sortable-item'
 import {
     DndContext,
     closestCenter
