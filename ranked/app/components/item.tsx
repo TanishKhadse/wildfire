@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { StringLiteral } from "typescript";
-
+import {useSortable} from "@dnd-kit/sortable"
 interface ItemProps {
     label: string;
     src: string;
@@ -11,8 +11,13 @@ const Item: React.FC<ItemProps> = ({
     src,
     onClick,
 }) => {
+    
     return (
-        <div className = "bg-stone-0 w-[90px] h-[90px] flex items-center select-none group">
+        <div className = "cursor-move bg-stone-0 w-[90px] h-[90px] flex items-center select-none group"
+        draggable
+        
+    
+        >
             <div className = "w-[90px] h-[90px] invisible group-hover:visible">
                 <p className = "text-center">
                     {label}

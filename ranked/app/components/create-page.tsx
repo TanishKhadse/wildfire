@@ -12,6 +12,7 @@ import { useState } from 'react'
 export default function CreatePage() {
 
     const settingsModal = useSettingsModal()
+
     const [items, setItems] = useState<string[]>(["yareli", "octavia", "citrine", "mirage", "hydroid", "gara"]);
 
     const handleAddItems = (newItems: string[]) => {
@@ -25,7 +26,6 @@ export default function CreatePage() {
             <SettingsModal />
 
             <div className="flex justify-between">  
-
                 <div className="
                     flex 
                     flex-col 
@@ -49,7 +49,7 @@ export default function CreatePage() {
                         
 
                     </div>
-
+                    
                     <TierList />
                 </div>
 

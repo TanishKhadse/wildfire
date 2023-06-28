@@ -36,10 +36,11 @@ const ImageGrid: React.FC<ImageGridProps> = (
                 mr-10
                 ml-5
                 pt-10
-
             ">
+
                 {items.items.map((img: string) => 
                     <Item label = {img} src = {''}/> 
+
                 )}
 
             </div>
