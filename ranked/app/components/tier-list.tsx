@@ -1,5 +1,4 @@
-import Tier from "./tier";
-
+import Tier from "./tier"
 export default function TierList() {
     return(
         <div>
@@ -10,6 +9,7 @@ export default function TierList() {
                 select-none
                 px-5
             ">
+                
                 <Tier label='S' items={["frost", "oberon", "khora", "wisp","saryn"]}/>
                 <Tier label='A' items={["nidus", "volt", "styanax", "mag", "protea", "ivara", "gyre", "harrow", "nekros"]}/>
                 <Tier label='B' items={["banshee", "atlas", "hildryn", "rhino"]}/>

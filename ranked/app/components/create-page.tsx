@@ -9,13 +9,11 @@ import useSettingsModal from '../hooks/UseSettingsModal'
 export default function CreatePage() {
 
     const settingsModal = useSettingsModal()
-
+    
     return (
         <div>
 
-
             <div className="flex justify-between">  
-
                 <div className="
                     flex 
                     flex-col 
@@ -39,7 +37,7 @@ export default function CreatePage() {
                         
 
                     </div>
-
+                    
                     <TierList />
                 </div>
 

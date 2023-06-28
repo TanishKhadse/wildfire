@@ -34,10 +34,9 @@ export default function ImageGrid() {
                 mr-10
                 ml-5
                 pt-10
-
             ">
                 {images.map((img) => 
-                    <Item label = {img} src = {''}/> 
+                    <Item label = {img} src = {''}/>
                 )}
 
             </div>
