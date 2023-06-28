@@ -36,6 +36,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                         width = "90"
                         height = "90"
                         src={src || '/chiyo.png'}
+                        style={{objectFit: 'none'}}
                         alt=""
                     />
                 </div>
