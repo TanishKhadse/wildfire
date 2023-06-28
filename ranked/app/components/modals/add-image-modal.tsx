@@ -1,5 +1,6 @@
 'use client'
 
+import { Item } from "@prisma/client";
 import ImageUpload from "../inputs/image-upload";
 import Modal from "./modal";
 import useAddModal from "@/app/hooks/UseAddModal";
@@ -16,7 +17,7 @@ import {
 
 
 interface AddImageModalProps {
-    onAddItems: (items: string[]) => void;
+    onAddItems: (items: Item[]) => void;
 }
 
 const AddImageModal: React.FC<AddImageModalProps> = (
@@ -54,7 +55,13 @@ const AddImageModal: React.FC<AddImageModalProps> = (
 
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        onAddItems.onAddItems([data["itemAdd"]])
+        const obj: Item = {
+            label: data["itemAdd"],
+            image: imageSrc,
+            id: '',
+            rankingId: '',
+        }
+        onAddItems.onAddItems([obj])
         addImageModal.onClose()
     }
 

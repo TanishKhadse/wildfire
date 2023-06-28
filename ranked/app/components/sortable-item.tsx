@@ -2,10 +2,12 @@ import Image from "next/image"
 import {useSortable} from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
 interface SortableItemProps {
-    id: string
+    id: string;
+    src: string | null | undefined;
 }
 const SortableItem: React.FC<SortableItemProps> = ({
-    id
+    id,
+    src
 }) => {
     const {
         attributes,
@@ -13,7 +15,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
         setNodeRef,
         transform,
         transition
-    } = useSortable({id:id});
+    } = useSortable({id});
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -33,7 +35,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                     <Image
                         width = "90"
                         height = "90"
-                        src = {'/chiyo.png'}
+                        src={src || '/chiyo.png'}
                         alt=""
                     />
                 </div>

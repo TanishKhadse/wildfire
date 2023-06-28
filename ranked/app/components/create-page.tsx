@@ -1,5 +1,6 @@
 'use client'
 
+import { Item } from '@prisma/client'
 import InputTitle from './inputs/input-title'
 import TierList from './tier-list'
 import ImageGrid from './image-grid'
@@ -9,13 +10,14 @@ import SettingsModal from './modals/settings-modal'
 import AddImageModal from './modals/add-image-modal'
 import { useState } from 'react'
 
+
 export default function CreatePage() {
 
     const settingsModal = useSettingsModal()
 
-    const [items, setItems] = useState<string[]>(["yareli", "octavia", "citrine", "mirage", "hydroid", "gara"]);
+    const [items, setItems] = useState<Item[]>([]);
 
-    const handleAddItems = (newItems: string[]) => {
+    const handleAddItems = (newItems: Item[]) => {
         setItems([...items, ...newItems])
         console.log(...newItems)
     }
