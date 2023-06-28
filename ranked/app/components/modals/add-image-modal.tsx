@@ -4,6 +4,9 @@ import ImageUpload from "../inputs/image-upload";
 import Modal from "./modal";
 import useAddModal from "@/app/hooks/UseAddModal";
 import Input from "../inputs/input";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 import { 
     FieldValues, 
@@ -11,9 +14,18 @@ import {
     useForm
   } from 'react-hook-form';
 
-export default function AddImageModal() {
+
+interface AddImageModalProps {
+    onAddItems: (items: string[]) => void;
+}
+
+const AddImageModal: React.FC<AddImageModalProps> = (
+    onAddItems
+) => {
 
     const addImageModal = useAddModal();
+    const [ isLoading, setIsLoading ] = useState(false);
+    const router = useRouter()
     const {
         register,
         handleSubmit,
@@ -40,6 +52,12 @@ export default function AddImageModal() {
         })
     }
 
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        onAddItems.onAddItems([data["itemAdd"]])
+        addImageModal.onClose()
+    }
+
     const body = (
         <div className="flex flex-col">
             <Input 
@@ -48,6 +66,7 @@ export default function AddImageModal() {
                 label="Add Item" 
                 register={register}
                 errors={errors}
+                required
                 />
             {/* load image */}
             <ImageUpload
@@ -67,7 +86,7 @@ export default function AddImageModal() {
         <Modal 
             isOpen={addImageModal.isOpen}
             onClose={addImageModal.onClose} 
-            onSubmit={()=>{}} 
+            onSubmit={handleSubmit(onSubmit)} 
             actionLabel="Add Item(s)"
             title="Add Image"
             body={body}
@@ -75,3 +94,5 @@ export default function AddImageModal() {
         />
     )
 }
+
+export default AddImageModal

@@ -9,15 +9,11 @@ import Modal from './modal';
 import {FcGoogle} from 'react-icons/fc';
 import Button from '../button';
 import { signIn } from 'next-auth/react';
-import { useAuthState } from "react-firebase-hooks/auth" 
-import {useRouter} from 'next/navigation';
 import axios from 'axios';
 
 
 
 export default function AuthModal() {
-    const router = useRouter();
-
     const registerModal = useRegisterModal()
     const loginModal = useLoginModal()
     const [ isLoading, setIsLoading ] = useState(false);

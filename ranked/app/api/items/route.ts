@@ -19,7 +19,7 @@ export async function POST(
         data: {
             image,
             label, 
-            userId: currentUser.id
+            rankingId: ''
         }
     })
     return NextResponse.json(item)
