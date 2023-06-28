@@ -1,6 +1,7 @@
 import Tier from "./tier"
 import ImageGrid from "./image-grid";
-import Item from "@prisma/client"
+import { Item } from "@prisma/client"
+
 interface TierListProps {
     gallery: Item[]
 }
@@ -12,13 +13,13 @@ const TierList: React.FC<TierListProps> = ({
 
 
     return(
-        <div className ="flex flex-row">
+        <div className ="flex flex-row gap-20">
             <div className="
-                mt-5
                 flex
                 flex-col
                 select-none
-                px-5
+                w-full
+                basis-3/4
             ">
                 
                 <Tier label='S' items={[{label: "frost", image: '', id: '', rankingId: ''}]}/>
@@ -30,8 +31,8 @@ const TierList: React.FC<TierListProps> = ({
 
 
             </div>
-            <div className = "flex flex-row items-center mt-10 justify-between w-[60vw] border-b-[1px] border-b-neutral-300">
-            <ImageGrid items={gallery}/>
+            <div className="basis-1/4">
+                <ImageGrid items={gallery}/>
             </div>
             
         </div>
