@@ -22,6 +22,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     const handleUpload = useCallback((result: any) => {
         onChange(result.info.secure_url)
     }, [onChange])
+
     return (
         <CldUploadWidget 
             onUpload={handleUpload}
@@ -59,7 +60,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                     <Image
                                         alt="Upload"
                                         fill
-                                        style={{ objectFit: 'cover'}}
+                                        style={{objectFit: 'cover'}}
                                         src={value}
                                     />
                                 </div>
