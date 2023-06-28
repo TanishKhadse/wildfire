@@ -52,14 +52,14 @@ export default function CreatePage() {
 
                     </div>
                     
-                    <TierList />
+                    <TierList gallery = {items}/>
                 </div>
 
 
-                <div className="mt-10">
+                {/* <div className="mt-10">
                  <ImageGrid items={items}/>
 
-                </div>
+                </div> */}
             </div>
 
             

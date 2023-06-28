@@ -1,10 +1,18 @@
 import Tier from "./tier"
-export default function TierList() {
+import ImageGrid from "./image-grid";
+import Item from "@prisma/client"
+interface TierListProps {
+    gallery: Item[]
+}
+const TierList: React.FC<TierListProps> = ({
+    gallery
+    }
+) => {
 
 
 
     return(
-        <div>
+        <div className ="flex flex-row">
             <div className="
                 mt-5
                 flex
@@ -22,6 +30,12 @@ export default function TierList() {
 
 
             </div>
+            <div className = "flex flex-row items-center mt-10 justify-between w-[60vw] border-b-[1px] border-b-neutral-300">
+            <ImageGrid items={gallery}/>
+            </div>
+            
         </div>
     );
 }
+
+export default TierList
