@@ -33,14 +33,26 @@ const Tier: React.FC<TierProps> = ({label, items}) =>{
             items-center
             border-b-[1px]
             border-b-neutral-300">
-                <p className="text-5xl
-                w-[50px]">{label}</p>
-                <SortableContext
-                    items={itemArray}
-                    strategy={horizontalListSortingStrategy}
-                >
-                    {itemArray.map(item => <SortableItem key={item} id={item}/>)}
-                </SortableContext>
+                <p className="text-5xl w-[50px]">
+                    {label}
+                </p>
+                <div className="
+                    flex
+                    flex-row
+                    flex-wrap
+                    h-auto
+                    max-w-2xl
+                    gap-2
+                ">
+
+                
+                    <SortableContext
+                        items={itemArray}
+                        strategy={horizontalListSortingStrategy}
+                    >
+                        {itemArray.map(item => <SortableItem key={item} id={item}/>)}
+                    </SortableContext>
+                </div>
             </div>
             
         
