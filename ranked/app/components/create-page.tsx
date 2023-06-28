@@ -4,8 +4,9 @@ import { Item } from '@prisma/client'
 import InputTitle from './inputs/input-title'
 import TierList from './tier-list'
 import ImageGrid from './image-grid'
-import { BiCog } from 'react-icons/bi'
+import { BiCog, BiPlus, BiTrash } from 'react-icons/bi'
 import useSettingsModal from '../hooks/UseSettingsModal'
+import useAddModal from '../hooks/UseAddModal'
 import SettingsModal from './modals/settings-modal'
 import AddImageModal from './modals/add-image-modal'
 import { useState } from 'react'
@@ -14,6 +15,7 @@ import { useState } from 'react'
 export default function CreatePage() {
 
     const settingsModal = useSettingsModal()
+    const addImageModal = useAddModal()
 
     const [items, setItems] = useState<Item[]>([]);
 
@@ -27,11 +29,12 @@ export default function CreatePage() {
             <AddImageModal onAddItems={handleAddItems}/>
             <SettingsModal />
 
-            <div className="flex justify-between">  
+            <div className="">  
                 <div className="
                     flex 
                     flex-col 
-                    ml-10                     
+                    ml-[5vw]  
+                    w-[90vw]                 
                 ">
                     <div className="
                         flex 
@@ -41,26 +44,25 @@ export default function CreatePage() {
                         justify-between 
                         border-b-[1px]
                         border-b-neutral-300
-                        w-[60vw]
-
                     ">
-                        <InputTitle/>
-                        <div className="mr-5">
-                            <BiCog className="cursor-pointer" onClick={settingsModal.onOpen}/>
+                        <div className="w-auto">
+                            <InputTitle/>
                         </div>
                         
-
+                        <div className="flex justify-between gap-[10px]">
+                            <BiCog className="cursor-pointer" onClick={settingsModal.onOpen}/>
+                            <BiTrash className="cursor-pointer text-lg" onClick={()=>{}}/>
+                            <div className="text-lg">
+                                <BiPlus className="cursor-pointer" onClick={addImageModal.onOpen} />   
+                            </div>
+                        </div>
                     </div>
                     
-                    <TierList gallery = {items}/>
+                    <TierList gallery={items}/>
+                    
                 </div>
-
-
-                {/* <div className="mt-10">
-                 <ImageGrid items={items}/>
-
-                </div> */}
             </div>
+
 
             
         </div>
