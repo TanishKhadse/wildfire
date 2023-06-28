@@ -1,5 +1,5 @@
-import AddImageModal from "../components/modals/add-image-modal";
-import SettingsModal from "../components/modals/settings-modal";
+// import AddImageModal from "../components/modals/add-image-modal";
+// import SettingsModal from "../components/modals/settings-modal";
 
 export default function CreateLayout({ 
     children, 
@@ -9,8 +9,7 @@ export default function CreateLayout({
     return( 
         <>
         <main>
-            <AddImageModal/>
-            <SettingsModal />
+
             {children}
         </main>
         </>

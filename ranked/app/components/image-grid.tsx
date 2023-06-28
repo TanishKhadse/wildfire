@@ -5,7 +5,14 @@ import AddImageModal from './modals/add-image-modal'
 import useAddModal from '../hooks/UseAddModal'
 import Item from './item';
 
-export default function ImageGrid() {
+
+interface ImageGridProps {
+    items: string[]
+}
+
+const ImageGrid: React.FC<ImageGridProps> = (
+    items
+) => {
     /** set images to get (images and names): 
          * {
          *  image: '',
@@ -14,11 +21,6 @@ export default function ImageGrid() {
      */
 
     const addImageModal = useAddModal();
-    const addImage = (img: string) => {
-        images.push(img)
-    }
-
-    const images = ["yareli", "octavia", "citrine", "mirage", "hydroid", "gara"] 
 
     return (
         <div className="flex flex-col">
@@ -36,7 +38,7 @@ export default function ImageGrid() {
                 pt-10
 
             ">
-                {images.map((img) => 
+                {items.items.map((img: string) => 
                     <Item label = {img} src = {''}/> 
                 )}
 
@@ -45,3 +47,5 @@ export default function ImageGrid() {
 
     );
 }
+
+export default ImageGrid
