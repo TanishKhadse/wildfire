@@ -3,11 +3,13 @@
 import { BiPlus } from 'react-icons/bi'
 import AddImageModal from './modals/add-image-modal'
 import useAddModal from '../hooks/UseAddModal'
-import Item from './item';
+import { Item } from '@prisma/client'
+import SortableItem from './sortable-item'
+
 
 
 interface ImageGridProps {
-    items: string[]
+    items: Item[]
 }
 
 const ImageGrid: React.FC<ImageGridProps> = (
@@ -38,8 +40,8 @@ const ImageGrid: React.FC<ImageGridProps> = (
                 pt-10
             ">
 
-                {items.items.map((img: string) => 
-                    <Item label = {img} src = {''}/> 
+                {items.items.map((i: Item) => 
+                    <SortableItem id={i.label} src={i.image} /> 
 
                 )}
 

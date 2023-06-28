@@ -51,8 +51,8 @@ model Ranking {
 
 model Item {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  image String?
-  label String?
+  image String
+  label String
   // userId String @db.ObjectId
   rankingId String @db.ObjectId
 

@@ -1,4 +1,4 @@
-import Item from './item';
+import { Item } from '@prisma/client';
 import handleOnDrop from './create-page'
 import handleDragOver from './create-page'
 import CreatePage from './create-page';
@@ -16,7 +16,7 @@ import {
 
 interface TierProps {
     label: string;
-    items: string[]
+    items: Item[]
 }
 
 
@@ -50,7 +50,7 @@ const Tier: React.FC<TierProps> = ({label, items}) =>{
                         items={itemArray}
                         strategy={horizontalListSortingStrategy}
                     >
-                        {itemArray.map(item => <SortableItem key={item} id={item}/>)}
+                        {itemArray.map(item => <SortableItem id={item.label} src={item.image}/>)}
                     </SortableContext>
                 </div>
             </div>
