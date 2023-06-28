@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"
 import useRegisterModal from "@/app/hooks/UseRegisterModal"
 import useLoginModal from "@/app/hooks/UseLoginModal"
 import Modal from "./modal"
-import Input from "../input"
+import Input from "../inputs/input"
 import Button from "../button"
 import {FcGoogle} from 'react-icons/fc';
 

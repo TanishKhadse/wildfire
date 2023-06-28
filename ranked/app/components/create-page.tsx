@@ -1,17 +1,29 @@
 'use client'
 
-import InputTitle from './input-title'
+import InputTitle from './inputs/input-title'
 import TierList from './tier-list'
 import ImageGrid from './image-grid'
 import { BiCog } from 'react-icons/bi'
 import useSettingsModal from '../hooks/UseSettingsModal'
+import SettingsModal from './modals/settings-modal'
+import AddImageModal from './modals/add-image-modal'
+import { useState } from 'react'
 
 export default function CreatePage() {
 
     const settingsModal = useSettingsModal()
-    
+
+    const [items, setItems] = useState<string[]>(["yareli", "octavia", "citrine", "mirage", "hydroid", "gara"]);
+
+    const handleAddItems = (newItems: string[]) => {
+        setItems([...items, ...newItems])
+        console.log(...newItems)
+    }
+
     return (
         <div>
+            <AddImageModal onAddItems={handleAddItems}/>
+            <SettingsModal />
 
             <div className="flex justify-between">  
                 <div className="
@@ -43,7 +55,7 @@ export default function CreatePage() {
 
 
                 <div className="mt-10">
-                 <ImageGrid />
+                 <ImageGrid items={items}/>
 
                 </div>
             </div>
