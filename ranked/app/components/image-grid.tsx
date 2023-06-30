@@ -6,14 +6,14 @@ import SortableItem from './sortable-item'
 
 interface ImageGridProps {
     items: Item[];
-    addToDeleteList: (id: string) => void;
+    select: (id: string) => void;
     deselect: (id: string) => void;
     selectedItems: string[];
 }
 
 const ImageGrid: React.FC<ImageGridProps> = ({
     items,
-    addToDeleteList,
+    select,
     deselect,
     selectedItems,
 }) => {
@@ -21,7 +21,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     const handleSelectItems = (id: string) => {
         const index = selectedItems.indexOf(id);
         if (index === -1) {
-            addToDeleteList(id);
+            select(id);
         } else {
             deselect(id)
         }
