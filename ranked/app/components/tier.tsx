@@ -12,7 +12,11 @@ interface TierProps {
     label: string;
     items: Item[] | undefined;
     addItem: (key: string, value: Item) => void;
+    deleteItem?: (key: string, value: Item) => void;
 
+    select: (id: string) => void;
+    deselect: (id: string) => void;
+    selectedItems: string[];
 }
 
 
@@ -20,8 +24,22 @@ const Tier: React.FC<TierProps> = ({
     label,
     items,
     addItem,
+    deleteItem,
+
+    select,
+    deselect,
+    selectedItems
 }) =>{
 
+    const handleSelectItems = (id: string) => {
+        const index = selectedItems.indexOf(id);
+        if (index === -1) {
+            select(id);
+        } else {
+            deselect(id)
+        }
+        console.log(selectedItems)
+    }
 
     return (
         <div className="
@@ -32,9 +50,11 @@ const Tier: React.FC<TierProps> = ({
             border-b-[1px]
             border-b-neutral-300
         "
-            onClick={() => addItem(label, {id: '', image: '', label: "frost", rankingId: ''})}
+            
         >
-            <p className="text-5xl w-[50px]">
+            <p className="text-5xl w-[50px]"
+            onClick={() => addItem(label, {id: '', image: '', label: "frost", rankingId: ''})}
+            >
                 {label}
             </p>
             <div className="
@@ -44,7 +64,8 @@ const Tier: React.FC<TierProps> = ({
                 h-auto
                 max-w-2xl
                 gap-2
-            ">
+            "
+            >
             
                 {/* <SortableContext
                     id={label}
@@ -52,7 +73,7 @@ const Tier: React.FC<TierProps> = ({
                     strategy={horizontalListSortingStrategy}
                 > */}
                     {items && items.map(i => 
-                        <SortableItem id={i.label} src={i.image} label={i.label} selected={false}/>
+                        <SortableItem id={i.label} src={i.image} label={i.label} onSelect={handleSelectItems} selected={selectedItems.includes(i.label)} />
                     )}
                 {/* </SortableContext> */}
             </div>

@@ -70,8 +70,21 @@ const TierList: React.FC<TierListProps> = ({
         }
 
         setMapState(map);
-
       }
+
+    //   const deleteItemFromTier = (key: string, value: Item) => {
+    //     if (!mapState) return;
+    //     const map = new Map(mapState)
+    //     const currItems = map.get(key)
+
+    //     if (!currItems) {
+    //         map.set(key, [])
+    //     } else {
+    //         map.set(key, currItems.filter((curr) => curr.label !== value.label))
+    //     }
+
+    //     setMapState(map);
+    //   }
 
 
 
@@ -80,6 +93,8 @@ const TierList: React.FC<TierListProps> = ({
 
     const selectList = (id: string) => {
         setSelectedItems([...selectedItems, id])
+        console.log(selectedItems)
+        
     }
     const deselect = (id: string) => { 
         setSelectedItems(selectedItems.filter((item) => item !== id))
@@ -88,8 +103,6 @@ const TierList: React.FC<TierListProps> = ({
     const handleDeleteItems = () => {
         const updatedItems = itemBank.filter((item) => !selectedItems.includes(item.label));
         setItemBank(updatedItems);
-
-        // clears selectedItems and deactivates delete mode
         setSelectedItems([])
         deleteItems.deactivate()
     }
@@ -140,6 +153,10 @@ const TierList: React.FC<TierListProps> = ({
                                 label={tier} 
                                 items={mapState.get(tier)}
                                 addItem={addItemToTier}
+                                // deleteItem={deleteItemFromTier}
+                                select={selectList} 
+                                deselect={deselect} 
+                                selectedItems={selectedItems}
                             />)
                         )}
                     </div>
@@ -147,7 +164,11 @@ const TierList: React.FC<TierListProps> = ({
 
                     {/* Image bank */}
                     <div className="basis-1/4">
-                        <ImageGrid items={itemBank} addToDeleteList={selectList} deselect={deselect} selectedItems={selectedItems}/>
+                        <ImageGrid 
+                            items={itemBank} 
+                            select={selectList} 
+                            deselect={deselect} 
+                            selectedItems={selectedItems}/>
                     </div>
                     
                 </div>
