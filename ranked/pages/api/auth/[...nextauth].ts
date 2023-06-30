@@ -11,7 +11,6 @@ import CredentialsProvider from "next-auth/providers/credentials"
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db),
     providers: [
-
         CredentialsProvider({
             name: 'credentials',
             credentials: {
@@ -45,9 +44,9 @@ export const authOptions: NextAuthOptions = {
         }),
 
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-        })
+            clientId: process.env.GOOGLE_CLIENT_ID || '',
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+        }),
     ],
     pages: {
         signIn: '/'
@@ -56,26 +55,20 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt',
     },
-    // jwt: {
-    //     secret: process.env.NEXTAUTH_JWT_SECRET
-    // },
+    jwt: {
+        secret: process.env.NEXTAUTH_JWT_SECRET,
+    },
     secret: process.env.NEXTAUTH_SECRET,
-    // callbacks: {
-    //     session({token, session}) {
-    //         if (token) {
-    //             session.user.id = token.id
-    //             session.user.name = token.name
-    //             session.user.email = token.email
-    //             session.user.image = token.picture
-    //         }
-
-    //         return session
-    //     },
-    //     async jwt({token, user}) {
-    //         const dbUser = await db.
-    //     }
-    // }
-
+    callbacks: {
+        async redirect({ url, baseUrl }) {
+          // Allows relative callback URLs
+          if (url.startsWith("/")) return `${baseUrl}${url}`
+          // Allows callback URLs on the same origin
+          else if (new URL(url).origin === baseUrl) return url
+          return baseUrl
+        },
+    },
+    
 
 };
 

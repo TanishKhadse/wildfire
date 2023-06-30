@@ -7,7 +7,7 @@ import useLoginModal from '@/app/hooks/UseLoginModal';
 import Input from '../inputs/input';
 import Modal from './modal';
 import {FcGoogle} from 'react-icons/fc';
-import Button from '../button';
+import Button from '../inputs/button';
 import { signIn } from 'next-auth/react';
 import axios from 'axios';
 
@@ -105,7 +105,7 @@ export default function AuthModal() {
                 outline
                 label="Continue with Google"
                 icon={FcGoogle}
-                onClick={() => {signIn("google")}}   
+                onClick={() => signIn("google", {callbackUrl: '/'})}   
             />
 
 
