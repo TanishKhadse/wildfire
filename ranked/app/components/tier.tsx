@@ -1,5 +1,5 @@
 import { Item } from '@prisma/client';
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SortableItem from './sortable-item'
 import { useDroppable } from "@dnd-kit/core"
 import {
@@ -10,13 +10,18 @@ import {
 
 interface TierProps {
     label: string;
-    items: Item[]
-    onDelete: (label: string) => void;
+    items: Item[] | undefined;
+    addItem: (key: string, value: Item) => void;
+
 }
 
 
-const Tier: React.FC<TierProps> = ({label, items}) =>{
-    // const [itemArray, setItems] = useState(items);
+const Tier: React.FC<TierProps> = ({
+    label,
+    items,
+    addItem,
+}) =>{
+
 
     return (
         <div className="
@@ -26,7 +31,9 @@ const Tier: React.FC<TierProps> = ({label, items}) =>{
             items-center
             border-b-[1px]
             border-b-neutral-300
-        ">
+        "
+            onClick={() => addItem(label, {id: '', image: '', label: "frost", rankingId: ''})}
+        >
             <p className="text-5xl w-[50px]">
                 {label}
             </p>
@@ -39,15 +46,15 @@ const Tier: React.FC<TierProps> = ({label, items}) =>{
                 gap-2
             ">
             
-                <SortableContext
+                {/* <SortableContext
                     id={label}
                     items={items}
                     strategy={horizontalListSortingStrategy}
-                >
-                    {items.map(item => 
-                        <SortableItem id={item.label} src={item.image}/>
+                > */}
+                    {items && items.map(i => 
+                        <SortableItem id={i.label} src={i.image} label={i.label} selected={false}/>
                     )}
-                </SortableContext>
+                {/* </SortableContext> */}
             </div>
         </div>
             

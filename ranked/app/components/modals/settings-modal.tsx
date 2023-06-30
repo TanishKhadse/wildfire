@@ -12,7 +12,7 @@ import {
   } from 'react-hook-form';
 
 interface SettingsModalProps {
-    onAddTier: (tiers: string[]) => void;
+    onAddTier: (tiers: string) => void;
     onDelete: (label: string) => void;
     tiers: string[]
 }
@@ -35,12 +35,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
         },
     } = useForm<FieldValues>({
         defaultValues: {
-            itemAdd: ""
+            label: ""
         }
     })
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        onAddTier([data["label"]])
+        if (data["label"] !== null && data["label"].trim().length != 0 && !tiers.includes(data["label"])){
+            onAddTier(data["label"])
+        }
         setValue('label', '')
         settingsModal.onClose()
     }
@@ -54,7 +56,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                     label="Add Tier" 
                     register={register}
                     errors={errors}
-                    required
+                    required={false}
                     />
                     <div className="flex flex-row justify-evenly">
                         {tiers.map(tier => 

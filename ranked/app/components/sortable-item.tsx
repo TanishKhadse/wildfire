@@ -7,12 +7,19 @@ import { BiX } from "react-icons/bi"
 import useDeleteItems from "../hooks/UseDeleteItems"
 
 interface SortableItemProps {
+    label: string;
     id: string;
     src: string | null | undefined;
+    onSelect?: (id: string) => void;
+    selected: boolean;
 }
 const SortableItem: React.FC<SortableItemProps> = ({
+    label,
     id,
-    src
+    src,
+    onSelect,
+    selected,
+
 }) => {
     const {
         attributes,
@@ -21,7 +28,6 @@ const SortableItem: React.FC<SortableItemProps> = ({
         transform,
         transition
     } = useSortable({id});
-
     const style = {
         transform: CSS.Transform.toString(transform),
         transition
@@ -33,6 +39,9 @@ const SortableItem: React.FC<SortableItemProps> = ({
 
     const click = () => {
         setClicked(!clicked)
+        if (!onSelect) return;
+        onSelect(label)
+        // console.log(label)
     }
 
 
@@ -41,7 +50,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
             <div className = "cursor-move bg-stone-0 w-[90px] h-[90px] flex items-center select-none group relative">
                 <div className = "w-[90px] h-[90px] invisible group-hover:visible bg-neutral-100">
                     <p className = "text-center">
-                        {id}
+                        {label}
                     </p>
                 </div>
 

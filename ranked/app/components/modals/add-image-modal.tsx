@@ -61,6 +61,7 @@ const AddImageModal: React.FC<AddImageModalProps> = (
             id: '',
             rankingId: '',
         }
+        setValue('itemAdd', '')
         onAddItems.onAddItems([obj])
         addImageModal.onClose()
     }
