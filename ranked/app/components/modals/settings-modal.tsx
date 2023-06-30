@@ -3,19 +3,66 @@
 import useSettingsModal from "@/app/hooks/UseSettingsModal";
 import Modal from "./modal";
 import { useState } from 'react'
+import Input from "../inputs/input";
+import TierLabel from "./tier-label";
+import { 
+    FieldValues, 
+    SubmitHandler, 
+    useForm
+  } from 'react-hook-form';
 
-export default function SettingsModal() {
+interface SettingsModalProps {
+    onAddTier: (tiers: string[]) => void;
+    onDelete: (label: string) => void;
+    tiers: string[]
+}
+
+
+const SettingsModal: React.FC<SettingsModalProps> = ({
+    onAddTier,  
+    onDelete,
+    tiers,
+}) => {
 
     const settingsModal = useSettingsModal()
     const [ isLoading, setIsLoading ] = useState(false);
-    
-    const saveSettings = () => {
-        // submit handler
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: {
+            errors,
+        },
+    } = useForm<FieldValues>({
+        defaultValues: {
+            itemAdd: ""
+        }
+    })
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        onAddTier([data["label"]])
+        setValue('label', '')
+        settingsModal.onClose()
     }
 
     const body = (
         <div>
-            <input type="checkbox" id="settings-btn"/>
+            <div className="flex flex-col">
+                <Input 
+                    type="text" 
+                    id="label" 
+                    label="Add Tier" 
+                    register={register}
+                    errors={errors}
+                    required
+                    />
+                    <div className="flex flex-row justify-evenly">
+                        {tiers.map(tier => 
+                            <TierLabel label={tier} onDelete={onDelete}/>
+                        )}
+                    </div>
+            </div>
+
         </div>
     )
 
@@ -24,11 +71,12 @@ export default function SettingsModal() {
 
         </div>
     )
+
     return (
         <Modal 
             isOpen={settingsModal.isOpen}
             onClose={settingsModal.onClose} 
-            onSubmit={()=>{}} 
+            onSubmit={handleSubmit(onSubmit)} 
             actionLabel="Save"
             title="Settings"
             body={body}
@@ -36,3 +84,5 @@ export default function SettingsModal() {
         />
     )
 }
+
+export default SettingsModal;

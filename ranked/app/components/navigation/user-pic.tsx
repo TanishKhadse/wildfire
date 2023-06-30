@@ -21,13 +21,6 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
     }, [])
 
 
-    const handleLogout = () => {
-        // signOut();
-        router.push('/')
-    }
-
-
-
     return (
         <div>
             <div className="

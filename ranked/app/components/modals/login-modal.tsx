@@ -13,7 +13,7 @@ import useRegisterModal from "@/app/hooks/UseRegisterModal"
 import useLoginModal from "@/app/hooks/UseLoginModal"
 import Modal from "./modal"
 import Input from "../inputs/input"
-import Button from "../button"
+import Button from "../inputs/button"
 import {FcGoogle} from 'react-icons/fc';
 
 
@@ -94,7 +94,7 @@ export default function LoginModal(){
                 outline
                 label="Continue with Google"
                 icon={FcGoogle}
-                onClick={() => {signIn('google')}}   
+                onClick={() => signIn('google', {callbackUrl: '/'})}   
             />
 
 

@@ -1,6 +1,6 @@
 'use client'
 import {useCallback, useEffect, useState} from "react"
-import Button from "../button"
+import Button from "../inputs/button"
 import {BiX} from "react-icons/bi";
 
 

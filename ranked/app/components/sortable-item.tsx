@@ -1,6 +1,11 @@
 import Image from "next/image"
 import {useSortable} from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
+import { useState } from "react"
+import { BiX } from "react-icons/bi"
+
+import useDeleteItems from "../hooks/UseDeleteItems"
+
 interface SortableItemProps {
     id: string;
     src: string | null | undefined;
@@ -22,10 +27,19 @@ const SortableItem: React.FC<SortableItemProps> = ({
         transition
     }
 
+    const del = useDeleteItems().isActive
+
+    const [clicked, setClicked] = useState(false)
+
+    const click = () => {
+        setClicked(!clicked)
+    }
+
+
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <div className = "cursor-move bg-stone-0 w-[90px] h-[90px] flex items-center select-none group">
-                <div className = "w-[90px] h-[90px] invisible group-hover:visible">
+            <div className = "cursor-move bg-stone-0 w-[90px] h-[90px] flex items-center select-none group relative">
+                <div className = "w-[90px] h-[90px] invisible group-hover:visible bg-neutral-100">
                     <p className = "text-center">
                         {id}
                     </p>
@@ -40,6 +54,21 @@ const SortableItem: React.FC<SortableItemProps> = ({
                         alt=""
                     />
                 </div>
+                {del && (<div className={`
+                    absolute
+                    top-0
+                    rounded-full
+                    border-red-500
+                    ${clicked ?  'bg-red-300' : 'bg-neutral-300'}
+                    w-4
+                    h-4
+                `}
+                    onClick={click}
+                >
+                    <BiX/>
+                </div>
+                )}
+
             </div>
 
         </div>
