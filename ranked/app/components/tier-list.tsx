@@ -91,18 +91,28 @@ const TierList: React.FC<TierListProps> = ({
     // delete items in bank
     const [selectedItems, setSelectedItems] = useState<string[]>([]); // selects based on id's
 
-    const selectList = (id: string) => {
+    const select = (id: string) => {
         setSelectedItems([...selectedItems, id])
-        console.log(selectedItems)
-        
     }
     const deselect = (id: string) => { 
         setSelectedItems(selectedItems.filter((item) => item !== id))
     }
 
+
+    // click on check icon
     const handleDeleteItems = () => {
-        const updatedItems = itemBank.filter((item) => !selectedItems.includes(item.label));
-        setItemBank(updatedItems);
+        setItemBank(itemBank.filter((item) => !selectedItems.includes(item.label)));
+
+        const map = new Map(mapState)
+        Array.from(mapState.keys()).forEach(t => {
+            const value = map.get(t)
+            if (!Array.isArray(value)) return;
+            map.set(t, value.filter((i) => !selectedItems.includes(i.label)))
+            // console.log(map.get(t))
+            
+        })
+
+        setMapState(map)
         setSelectedItems([])
         deleteItems.deactivate()
     }
@@ -153,8 +163,7 @@ const TierList: React.FC<TierListProps> = ({
                                 label={tier} 
                                 items={mapState.get(tier)}
                                 addItem={addItemToTier}
-                                // deleteItem={deleteItemFromTier}
-                                select={selectList} 
+                                select={select} 
                                 deselect={deselect} 
                                 selectedItems={selectedItems}
                             />)
@@ -166,7 +175,7 @@ const TierList: React.FC<TierListProps> = ({
                     <div className="basis-1/4">
                         <ImageGrid 
                             items={itemBank} 
-                            select={selectList} 
+                            select={select} 
                             deselect={deselect} 
                             selectedItems={selectedItems}/>
                     </div>

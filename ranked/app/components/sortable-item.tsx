@@ -41,7 +41,6 @@ const SortableItem: React.FC<SortableItemProps> = ({
         setClicked(!clicked)
         if (!onSelect) return;
         onSelect(label)
-        // console.log(label)
     }
 
 
@@ -68,7 +67,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                     top-0
                     rounded-full
                     border-red-500
-                    ${clicked ?  'bg-red-300' : 'bg-neutral-300'}
+                    ${selected ?  'bg-red-300' : 'bg-neutral-300'}
                     w-4
                     h-4
                 `}

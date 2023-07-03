@@ -12,8 +12,6 @@ interface TierProps {
     label: string;
     items: Item[] | undefined;
     addItem: (key: string, value: Item) => void;
-    deleteItem?: (key: string, value: Item) => void;
-
     select: (id: string) => void;
     deselect: (id: string) => void;
     selectedItems: string[];
@@ -24,8 +22,6 @@ const Tier: React.FC<TierProps> = ({
     label,
     items,
     addItem,
-    deleteItem,
-
     select,
     deselect,
     selectedItems
@@ -38,7 +34,6 @@ const Tier: React.FC<TierProps> = ({
         } else {
             deselect(id)
         }
-        console.log(selectedItems)
     }
 
     return (
@@ -49,11 +44,8 @@ const Tier: React.FC<TierProps> = ({
             items-center
             border-b-[1px]
             border-b-neutral-300
-        "
-            
-        >
-            <p className="text-5xl w-[50px]"
-            onClick={() => addItem(label, {id: '', image: '', label: "frost", rankingId: ''})}
+        ">
+            <p className="text-5xl w-[50px]" onClick={() => addItem(label, {id: '', image: '', label: "frost", rankingId: ''})}
             >
                 {label}
             </p>
