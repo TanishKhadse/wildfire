@@ -17,7 +17,7 @@ import {
 
 
 interface AddImageModalProps {
-    onAddItems: (items: Item[]) => void;
+    onAddItem: (items: Item) => void;
 }
 
 const AddImageModal: React.FC<AddImageModalProps> = (
@@ -62,7 +62,7 @@ const AddImageModal: React.FC<AddImageModalProps> = (
             rankingId: '',
         }
         setValue('itemAdd', '')
-        onAddItems.onAddItems([obj])
+        onAddItems.onAddItem(obj)
         addImageModal.onClose()
     }
 
