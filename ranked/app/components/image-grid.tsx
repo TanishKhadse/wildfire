@@ -24,7 +24,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
 }) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "item",
-        drop: (item: Item) => onAddItem(item),
+        drop: (item: Item) => onAddItem(item), // issue
         collect: (monitor) => ({
           isOver: !!monitor.isOver()
         })
