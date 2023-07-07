@@ -2,9 +2,8 @@
 
 ### Built using Next.js 13, Tailwind, Prisma, MongoDB
 
-Overview: 
-
-Features:
+### Overview: 
+Ranked is a highly customizable way of creating tier lists, and sharing them online to your network.  
 
 ## Install Packages: 
 ```npm i```
