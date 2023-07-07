@@ -12,6 +12,23 @@ import useDeleteItems from '../hooks/UseDeleteItems'
 import SettingsModal from './modals/settings-modal'
 import AddImageModal from './modals/add-image-modal'
 
+
+// Drag and Drop Logic
+// import {
+//     DndContext,
+//     DragOverlay,
+//     pointerWithin,
+//     KeyboardSensor,
+//     PointerSensor,
+//     useSensor,
+//     useSensors
+// } from "@dnd-kit/core";
+// import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+
+
 interface TierListProps {
     edit?: boolean;
 }
@@ -27,10 +44,10 @@ const TierList: React.FC<TierListProps> = ({
     // store items in bank
     const [itemBank, setItemBank] = useState<Item[]>([]);
 
-    const handleAddItems = (newItems: Item[]) => {
-        setItemBank([...itemBank, ...newItems])
+    const handleAddItem = (newItem: Item) => {
+        setItemBank([...itemBank, newItem])
+        console.log(itemBank)
     }
-
 
     // store tiers and their items using map
     const [mapState, setMapState] = useState(new Map<string, Item[]>([
@@ -67,9 +84,12 @@ const TierList: React.FC<TierListProps> = ({
             map.set(key, [value])
         } else {
             map.set(key, [...currItems, value])
+            console.log("new Item")
         }
 
         setMapState(map);
+
+        // console.log(mapState)
       }
 
     //   const deleteItemFromTier = (key: string, value: Item) => {
@@ -80,7 +100,7 @@ const TierList: React.FC<TierListProps> = ({
     //     if (!currItems) {
     //         map.set(key, [])
     //     } else {
-    //         map.set(key, currItems.filter((curr) => curr.label !== value.label))
+            // map.set(key, currItems.filter((curr) => curr.label !== value.label))
     //     }
 
     //     setMapState(map);
@@ -115,12 +135,13 @@ const TierList: React.FC<TierListProps> = ({
         setMapState(map)
         setSelectedItems([])
         deleteItems.deactivate()
+        console.log(itemBank)
     }
-
+      
 
     return(
-        <div>
-            <AddImageModal onAddItems={handleAddItems}/>
+        <DndProvider backend={HTML5Backend}>
+            <AddImageModal onAddItem={handleAddItem}/>
             <SettingsModal tiers={Array.from(mapState.keys())} onAddTier={addToMap} onDelete={removeFromMap}/>
              <div className="flex flex-col ml-[5vw] w-[90vw]">
                 {edit && <div className="
@@ -147,7 +168,6 @@ const TierList: React.FC<TierListProps> = ({
                     </div>
                 </div>}
                 <div className ="flex flex-row gap-20">
-
                     <div className="
                         flex
                         flex-col
@@ -170,21 +190,23 @@ const TierList: React.FC<TierListProps> = ({
                         )}
                     </div>
 
-
-                    {/* Image bank */}
+                        {/* Image bank */}
                     <div className="basis-1/4">
                         <ImageGrid 
+                            label="gallery"
                             items={itemBank} 
                             select={select} 
                             deselect={deselect} 
-                            selectedItems={selectedItems}/>
+                            selectedItems={selectedItems}
+                            onAddItem={handleAddItem}
+                        />
                     </div>
-                    
                 </div>
             </div>
-        </div>
+        </DndProvider>
 
     );
+
 }
 
 export default TierList

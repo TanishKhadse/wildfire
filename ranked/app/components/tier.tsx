@@ -6,6 +6,7 @@ import {
     SortableContext,
     horizontalListSortingStrategy
 } from "@dnd-kit/sortable"
+import { useDrop } from 'react-dnd';
 
 
 interface TierProps {
@@ -27,6 +28,19 @@ const Tier: React.FC<TierProps> = ({
     selectedItems
 }) =>{
 
+    const [{ isOver }, drop] = useDrop(() => ({
+        accept: "item",
+        drop: (item: Item) => {
+            console.log(label, item.label)
+            addItem(label, item)
+        },
+        collect: (monitor) => ({
+          isOver: !!monitor.isOver()
+        })
+      }))
+
+
+      
     const handleSelectItems = (id: string) => {
         const index = selectedItems.indexOf(id);
         if (index === -1) {
@@ -37,7 +51,9 @@ const Tier: React.FC<TierProps> = ({
     }
 
     return (
-        <div className="
+        <div
+            ref={drop} 
+            className="
             p-3 
             flex
             py-2
@@ -45,7 +61,7 @@ const Tier: React.FC<TierProps> = ({
             border-b-[1px]
             border-b-neutral-300
         ">
-            <p className="text-5xl w-[50px]" onClick={() => addItem(label, {id: '', image: '', label: "frost", rankingId: ''})}
+            <p className="text-5xl w-[50px]" onClick={() => addItem(label, {id: '', image: '', label: "inaros", rankingId: ''})}
             >
                 {label}
             </p>
@@ -59,15 +75,16 @@ const Tier: React.FC<TierProps> = ({
             "
             >
             
-                {/* <SortableContext
-                    id={label}
-                    items={items}
-                    strategy={horizontalListSortingStrategy}
-                > */}
-                    {items && items.map(i => 
-                        <SortableItem id={i.label} src={i.image} label={i.label} onSelect={handleSelectItems} selected={selectedItems.includes(i.label)} />
-                    )}
-                {/* </SortableContext> */}
+                {items && items.map(i => 
+                    <SortableItem 
+                        id={i.label} 
+                        src={i.image} 
+                        label={i.label} 
+                        onSelect={handleSelectItems} 
+                        selected={selectedItems.includes(i.label)}
+                        currItem={i} 
+                    />
+                )}
             </div>
         </div>
             
