@@ -6,13 +6,15 @@ import { useCallback, useState } from "react"
 import DropDownItem from "./drop-down-item"
 import {useRouter} from 'next/navigation'
 import { signOut } from "next-auth/react"
+import { SafeUser } from "@/app/types"
 
 
 interface UserPicProps {
     src: string | null | undefined;
+    user: SafeUser;
 }
 
-const UserPic: React.FC<UserPicProps> = ({src}) => {
+const UserPic: React.FC<UserPicProps> = ({src, user}) => {
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -34,6 +36,7 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
                 flex
                 items-center
                 justify-center
+                select-none
             "
             onClick={toggleOpenMenu}
             >
@@ -52,7 +55,7 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
                     rounded-md
                     shadow-md
                     p-2
-                    w-[12vw]
+                    w-[14vw]
                     right-8
                     top-14
                     overflow=hidden
@@ -63,7 +66,13 @@ const UserPic: React.FC<UserPicProps> = ({src}) => {
                     <div className="flex flex-col cursor-pointer">
                         <>
                         {/* <DropDownItem label="profile" onClick={() => router.push('/users/' + auth.currentUser?.uid)}/> */}
-                        <DropDownItem label="logout" onClick={() => {signOut()}}/>
+                        <DropDownItem label="Logout" onClick={() => {signOut()}}/>
+                        <DropDownItem label="My Rankings" onClick={
+                            () => {
+                                router.push('/users/' + user.username)
+                                setIsOpen((value)=>!value)
+                            }}
+                        />
                         </>
                     </div>
                 </div>

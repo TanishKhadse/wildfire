@@ -8,7 +8,7 @@ export async function POST(
     const body = await request.json()
     const {
         email,
-        name,
+        username,
         password
     } = body;
 
@@ -17,12 +17,10 @@ export async function POST(
     const user = await db.user.create({
         data: {
             email,
-            name,
+            username,
             hashedPassword
         }
     });
 
     return NextResponse.json(user);
 }
-
-// required 

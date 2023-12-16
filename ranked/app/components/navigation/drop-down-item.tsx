@@ -16,7 +16,7 @@ const DropDownItem: React.FC<DropDownItemProps> = ({
             py-3
             font-semibold
         ">
-            <p className="transition hover:text-rose-500">{label}</p>
+            <p className="transition hover:text-rose-500 select-none">{label}</p>
         </div>
     );
 }   

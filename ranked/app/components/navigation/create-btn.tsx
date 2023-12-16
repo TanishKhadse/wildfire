@@ -15,6 +15,7 @@ export default function CreateBtn() {
                 hover:text-rose-500
                 cursor-pointer
                 gap-1
+                select-none
             "
             >
                 <BiPlus/>

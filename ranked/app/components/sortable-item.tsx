@@ -1,12 +1,12 @@
 import Image from "next/image"
-// import {useSortable} from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
-import { useState } from "react"
+import React, { useState, useRef } from "react"
 import { BiX } from "react-icons/bi"
 import { Item } from "@prisma/client"
+import itemTypes from "../types/itemTypes"
 
 import useDeleteItems from "../hooks/UseDeleteItems"
-import { useDrag } from "react-dnd"
+import { useDrag, useDrop } from "react-dnd"
 
 interface SortableItemProps {
     label: string;
@@ -25,15 +25,48 @@ const SortableItem: React.FC<SortableItemProps> = ({
     currItem,
 
 }) => {
+    const ref = useRef(null)
+
+    // const [, drop] = useDrop({
+    //     accept: "item",
+    //     hover(item: any, monitor) {
+    //         if (!ref.current) return
+
+    //         const dragIndex = item.id
+    //         const hoverIndex = id
+
+    //         if (dragIndex == hoverIndex) return
+
+    //         const hoveredRect = ref.current.getBoundClientRect();
+    //         const hoverMiddleY = (hoveredRect.bottom - hoveredRect.top) / 2;
+    //         const mousePosition = monitor.getClientOffset();
+    //         var hoverClientY = 0;
+    //         if (mousePosition && mousePosition.y) {
+    //             hoverClientY = (mousePosition.y - hoveredRect.top);
+    //         } 
+
+    //         if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
+
+    //         if (dragIndex > hoverIndex && hoverClientY < hoverMiddleY) return
+
+    //         moveItem(dragIndex, hoverIndex)
+    //         item.index = hoverIndex
+    //     }
+    // })
 
 
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: "item",
-        item: currItem,
+        type: itemTypes.ITEM,
+        item: { 
+            type: itemTypes.ITEM,
+            ID: id,
+        }, // currItem
         collect: (monitor) => ({
           isDragging: !!monitor.isDragging()
         })
       }))
+
+
 
     // const del = useDeleteItems().isActive
     const [clicked, setClicked] = useState(false)

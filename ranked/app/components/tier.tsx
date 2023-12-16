@@ -1,11 +1,7 @@
 import { Item } from '@prisma/client';
 import { useState, useEffect } from "react"
 import SortableItem from './sortable-item'
-import { useDroppable } from "@dnd-kit/core"
-import {
-    SortableContext,
-    horizontalListSortingStrategy
-} from "@dnd-kit/sortable"
+import itemTypes from '../types/itemTypes';
 import { useDrop } from 'react-dnd';
 
 
@@ -29,7 +25,7 @@ const Tier: React.FC<TierProps> = ({
 }) =>{
 
     const [{ isOver }, drop] = useDrop(() => ({
-        accept: "item",
+        accept: itemTypes.ITEM,
         drop: (item: Item) => {
             console.log(label, item.label)
             addItem(label, item)
@@ -50,6 +46,9 @@ const Tier: React.FC<TierProps> = ({
         }
     }
 
+    var id_count = 0;
+    
+
     return (
         <div
             ref={drop} 
@@ -61,7 +60,7 @@ const Tier: React.FC<TierProps> = ({
             border-b-[1px]
             border-b-neutral-300
         ">
-            <p className="text-5xl w-[50px]" onClick={() => addItem(label, {id: '', image: '', label: "inaros", rankingId: ''})}
+            <p className="text-5xl w-[50px]"
             >
                 {label}
             </p>

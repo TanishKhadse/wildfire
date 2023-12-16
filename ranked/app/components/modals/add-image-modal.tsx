@@ -63,6 +63,7 @@ const AddImageModal: React.FC<AddImageModalProps> = (
         }
         setValue('itemAdd', '')
         onAddItems.onAddItem(obj)
+        // post to database (get unique ID)
         addImageModal.onClose()
     }
 
