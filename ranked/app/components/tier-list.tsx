@@ -24,8 +24,7 @@ import AddImageModal from './modals/add-image-modal'
 //     useSensors
 // } from "@dnd-kit/core";
 // import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+
 
 
 
@@ -140,7 +139,7 @@ const TierList: React.FC<TierListProps> = ({
       
 
     return(
-        <DndProvider backend={HTML5Backend}>
+        <div>
             <AddImageModal onAddItem={handleAddItem}/>
             <SettingsModal tiers={Array.from(mapState.keys())} onAddTier={addToMap} onDelete={removeFromMap}/>
              <div className="flex flex-col ml-[5vw] w-[90vw]">
@@ -203,7 +202,7 @@ const TierList: React.FC<TierListProps> = ({
                     </div>
                 </div>
             </div>
-        </DndProvider>
+        </div>
 
     );
 

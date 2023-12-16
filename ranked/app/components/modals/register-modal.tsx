@@ -26,7 +26,7 @@ export default function AuthModal() {
         }
     } = useForm<FieldValues>({
         defaultValues: {
-            name: '',
+            username: '',
             email: '',
             password: '' 
         }
@@ -74,8 +74,8 @@ export default function AuthModal() {
             />
 
             <Input
-                id="name"
-                label="Name"
+                id="username"
+                label="Username"
                 disabled={isLoading}
                 register={register}
                 errors={errors}

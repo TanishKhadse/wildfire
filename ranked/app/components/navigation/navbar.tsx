@@ -43,7 +43,7 @@ const NavigationBar: React.FC<NavBarProps> = ({
                 ">
                     {pathname !== '/create' && (<CreateBtn/>)}
                     {!currentUser && (<AuthBtn/>)}
-                    {currentUser && (<UserPic src={currentUser?.image}/>)}
+                    {currentUser && (<UserPic src={currentUser?.image} user={currentUser}/>)}
                 </div>
             </div>
 

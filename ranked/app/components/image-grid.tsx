@@ -24,7 +24,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
 }) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "item",
-        drop: (item: Item) => onAddItem(item), // issue
+        drop: (item: Item) =>  {onAddItem(item)},// , // issue
         collect: (monitor) => ({
           isOver: !!monitor.isOver()
         })
@@ -45,16 +45,13 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     // }
 
     return (
-        <div >
+        <div ref={drop}>
             <div 
-                ref={drop}
                 className="
                 flex
                 flex-wrap
                 gap-5
                 py-2
-                border-[1px]
-                border-red-500
             ">
 
                 {items.map((i: Item) => 
