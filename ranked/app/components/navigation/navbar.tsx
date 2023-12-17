@@ -32,7 +32,7 @@ const NavigationBar: React.FC<NavBarProps> = ({
                     gap-6
                 ">
                     <Logo/>
-                    {pathname === '/create' && (<CreateOptions/>)}
+                    {pathname?.includes('/create') && (<CreateOptions/>)}
                 </div>
 
                 <div className="
@@ -41,7 +41,7 @@ const NavigationBar: React.FC<NavBarProps> = ({
                     items-center
                     gap-6
                 ">
-                    {pathname !== '/create' && (<CreateBtn/>)}
+                    {pathname !== '/create' && (<CreateBtn />)}
                     {!currentUser && (<AuthBtn/>)}
                     {currentUser && (<UserPic src={currentUser?.image} user={currentUser}/>)}
                 </div>

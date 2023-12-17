@@ -29,16 +29,18 @@ import AddImageModal from './modals/add-image-modal'
 
 
 interface TierListProps {
+    title: string | undefined;
     edit?: boolean;
 }
 const TierList: React.FC<TierListProps> = ({
-    edit
+    edit,
+    title
 }) => {
     // hooks
     const settingsModal = useSettingsModal()
     const addImageModal = useAddModal()
     const deleteItems = useDeleteItems()
-
+    const placeholder = title ?? "Add Title";
 
     // store items in bank
     const [itemBank, setItemBank] = useState<Item[]>([]);
@@ -152,7 +154,7 @@ const TierList: React.FC<TierListProps> = ({
                     border-b-neutral-300
                 ">
                     <div className="w-full">
-                        <InputTitle/>
+                        <InputTitle title={placeholder}/>
                     </div>
                     
                     <div className="flex justify-between gap-[10px]">
@@ -176,8 +178,6 @@ const TierList: React.FC<TierListProps> = ({
                     ">
                         {/* Tiers */}
                         {tiers.map(tier => 
-                        
-                        
                             ( <Tier 
                                 label={tier} 
                                 items={mapState.get(tier)}

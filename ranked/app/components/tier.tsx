@@ -24,16 +24,16 @@ const Tier: React.FC<TierProps> = ({
     selectedItems
 }) =>{
 
-    const [{ isOver }, drop] = useDrop(() => ({
-        accept: itemTypes.ITEM,
-        drop: (item: Item) => {
-            console.log(label, item.label)
-            addItem(label, item)
-        },
-        collect: (monitor) => ({
-          isOver: !!monitor.isOver()
-        })
-      }))
+    // const [{ isOver }, drop] = useDrop(() => ({
+    //     accept: itemTypes.ITEM,
+    //     drop: (item: Item) => {
+    //         console.log(label, item.label)
+    //         addItem(label, item)
+    //     },
+    //     collect: (monitor) => ({
+    //       isOver: !!monitor.isOver()
+    //     })
+    //   }))
 
 
       
@@ -51,7 +51,7 @@ const Tier: React.FC<TierProps> = ({
 
     return (
         <div
-            ref={drop} 
+            // ref={drop} 
             className="
             p-3 
             flex

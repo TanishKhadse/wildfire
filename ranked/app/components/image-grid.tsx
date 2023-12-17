@@ -22,13 +22,13 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     selectedItems,
     onAddItem,
 }) => {
-    const [{ isOver }, drop] = useDrop(() => ({
-        accept: "item",
-        drop: (item: Item) =>  {onAddItem(item)},// , // issue
-        collect: (monitor) => ({
-          isOver: !!monitor.isOver()
-        })
-      }))
+    // const [{ isOver }, drop] = useDrop(() => ({
+    //     accept: "item",
+    //     drop: (item: Item) =>  {onAddItem(item)},// , // issue
+    //     collect: (monitor) => ({
+    //       isOver: !!monitor.isOver()
+    //     })
+    //   }))
 
 
     const handleSelectItems = (id: string) => {
@@ -45,7 +45,9 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     // }
 
     return (
-        <div ref={drop}>
+        <div
+        // ref={drop}
+        >
             <div 
                 className="
                 flex
