@@ -12,9 +12,10 @@ export async function POST(
     const {
         title,
         description,
-
     } = body
 
+
+    // update user account with this tier list too
     const ranking = await db.ranking.create({
         data: {
             title,
@@ -23,5 +24,25 @@ export async function POST(
         }
     })
 
+
+    // add ranking to user list
+
+    
+    // let ranking_ids = [...(currentUser.rankings || [])]
+
+    // // const updateUser = db.user.update({
+    // //     where: {
+    // //         id: currentUser.id
+    // //     },
+    // //     data: {
+    // //         rankings: {
+    // //             : {
+    // //                 id: ranking.id
+    // //             },
+                
+    // //         },
+    // //     }
+    // // });
+    
     return NextResponse.json(ranking)
 }

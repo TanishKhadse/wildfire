@@ -1,6 +1,4 @@
 import { db } from "../lib/db";
-import getCurrentUser from "./getCurrentUser";
-
 
 export default async function getUser(username: string) {
     try {

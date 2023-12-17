@@ -4,6 +4,7 @@ import LoginModal from "./components/modals/login-modal"
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import getCurrentUser from "./actions/getCurrentUser"
+import CreateTierListModal from "./components/modals/create-list-modal"
 
 // can be used to make a component that shows up on every page of the app
 
@@ -30,6 +31,7 @@ export default async function RootLayout({
       <body className={inter.className}>
           <RegisterModal/>
           <LoginModal/>
+          <CreateTierListModal/>
           <NavigationBar currentUser={currentUser}/>
         {children}
       </body>

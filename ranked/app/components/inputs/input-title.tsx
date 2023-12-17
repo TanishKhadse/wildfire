@@ -1,4 +1,11 @@
-export default function InputTitle() {
+interface InputTitleProps {
+    title: string
+}
+
+
+const InputTitle: React.FC<InputTitleProps> = ({
+    title
+}) => {
     return(
         <input 
             className=" 
@@ -10,7 +17,9 @@ export default function InputTitle() {
             "
             id="title" 
             type="text" 
-            placeholder="Title"
+            placeholder={title}
         ></input>
     )
 }
+
+export default InputTitle;

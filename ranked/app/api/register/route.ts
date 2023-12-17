@@ -18,7 +18,7 @@ export async function POST(
         data: {
             email,
             username,
-            hashedPassword
+            hashedPassword,
         }
     });
 
