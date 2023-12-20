@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/app/lib/db";
+import prisma from "@/app/lib/db";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export async function POST(
@@ -16,7 +16,7 @@ export async function POST(
 
 
     // update user account with this tier list too
-    const ranking = await db.ranking.create({
+    const ranking = await prisma.ranking.create({
         data: {
             title,
             description,

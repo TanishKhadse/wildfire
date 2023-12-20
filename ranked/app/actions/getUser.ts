@@ -1,9 +1,9 @@
-import { db } from "../lib/db";
+import prisma from "../lib/db";
 
 export default async function getUser(username: string) {
     try {
         // make query to get all the follower usernames for a given userId
-        const user = await db.user.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 username: username as string
             }

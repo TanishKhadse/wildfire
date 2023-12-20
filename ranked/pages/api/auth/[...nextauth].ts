@@ -1,7 +1,7 @@
 import NextAuth from "next-auth/next";
 
 import { NextAuthOptions } from "next-auth"
-import { db } from "@/app/lib/db";
+import prisma from "@/app/lib/db";
 import bcrypt from "bcrypt"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import GoogleProvider  from "next-auth/providers/google"
@@ -9,7 +9,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 
 
 export const authOptions: NextAuthOptions = {
-    adapter: PrismaAdapter(db),
+    adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: 'credentials',
@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error("Missing fields")
                 }
-                const user = await db.user.findUnique({
+                const user = await prisma.user.findUnique({
                     where: {
                         email: credentials.email
                     }

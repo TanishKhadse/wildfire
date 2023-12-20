@@ -13,7 +13,7 @@ interface IParams {
 }
 
 // use queries to get username from uid, and related tier lists
-const Create =   async ({params}: {params: IParams}) => {
+const Create = async ({params}: {params: IParams}) => {
     const ranking = await getRankingById(params)
     // const [rankingData, setRankingData] = useState(ranking);
     // useEffect(() => {
