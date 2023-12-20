@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/app/lib/db";
+import prisma from "@/app/lib/db";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export async function POST(
@@ -15,7 +15,7 @@ export async function POST(
         label,
     } = body
 
-    const item = await db.item.create({
+    const item = await prisma.item.create({
         data: {
             image,
             label, 

@@ -1,4 +1,4 @@
-import { db } from "../lib/db";
+import prisma from "../lib/db";
 import getCurrentUser from "./getCurrentUser";
 
 
@@ -11,7 +11,7 @@ export async function getRankingById(
 ) {
     try {
         const { rankingId } = params;
-        const ranking = await db.ranking.findUnique({
+        const ranking = await prisma.ranking.findUnique({
             where: {
                 id: rankingId
             },

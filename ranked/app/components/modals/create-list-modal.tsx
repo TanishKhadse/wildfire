@@ -23,6 +23,7 @@ export default function CreateTierListModal(){
     const { 
         register, 
         handleSubmit,
+        setValue,
         formState: {
           errors,
         },
@@ -44,7 +45,8 @@ export default function CreateTierListModal(){
             router.push('/create/' + response.data.id)
 
             setIsLoading(false)
-            // setValue()
+            setValue('title', '')
+            setValue('description', '')
             modal.onClose() 
         })
         .catch((error) => {
